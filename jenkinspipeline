@@ -52,7 +52,7 @@ EOF
             steps {
                 sh '''
                     echo "Waiting for Tomcat to start..."
-                    sleep 40
+                    sleep 30
                 '''
             }
         }
