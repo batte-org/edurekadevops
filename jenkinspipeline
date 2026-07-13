@@ -60,6 +60,7 @@ EOF
         stage('Test Application') {
             steps {
                 sh 'curl http://localhost:8081/testapp/'
+		sh 'sleep 120'
             }
         }
     }
