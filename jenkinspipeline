@@ -2,7 +2,6 @@ pipeline {
     agent any
 	environment {
              DOCKER_IMAGE = "my-testapp:${BUILD_NUMBER}"
-	     CID = ""
                 }
 
 
@@ -39,10 +38,12 @@ EOF
         stage('Run Container') {
             steps {
                 script {
-		   def CID = sh(script: 'docker run -d -p 8081:8080 ${DOCKER_IMAGE}',
+		   def CONTAINER_ID = sh(script: 'docker run -d -p 8081:8080 ${DOCKER_IMAGE}',
 			returnStdout: true
 			 ).trim()
-                    echo "Container ID = ${env.CID}"
+		    echo "raw output: '${CONTAINER_ID}'"
+		    env.CID = CONTAINER_ID
+                    echo "Container ID = '${env.CID}'"
                 }
             }
         }
