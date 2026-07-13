@@ -65,9 +65,15 @@ EOF
     }
 	post {
         always {
-		// Clean up Jenkins workspace after every build
-            cleanWs()
-        }
+		script {
+		 if (env.CID) {
+                    sh "docker stop ${env.CID} || true"
+                    sh "docker rm ${env.CID} || true"
+                   }
+                 }
+		sh "rm -f Dockerfile || true"
+		cleanWs()
+         }
 	}
 
 }
